@@ -132,7 +132,7 @@ bosses:
 
 ### Skill Types
 
-**COMMAND** — Runs console commands. Supports color codes (`&c`, `&#RRGGBB`).
+**COMMAND** Runs console commands. Supports color codes (`&c`, `&#RRGGBB`).
 
 ```yaml
 type: COMMAND
@@ -145,7 +145,7 @@ Available placeholders: `{target}` `{target_x}` `{target_y}` `{target_z}`
 `{boss_x}` `{boss_y}` `{boss_z}` `{boss_world}`  
 `{killer}` `{killer_uuid}` `{top_damager}` `{top_damager_uuid}`
 
-**LIGHTNING** — Strikes lightning at targets.
+**LIGHTNING** Strikes lightning at targets.
 
 ```yaml
 type: LIGHTNING
@@ -153,7 +153,7 @@ target: CURRENT_TARGET   # CURRENT_TARGET | RADIUS | SELF
 radius: 10               # only used when target: RADIUS
 ```
 
-**SUMMON_MINION** — Spawns minion bosses around the boss.
+**SUMMON_MINION** Spawns minion bosses around the boss.
 
 ```yaml
 type: SUMMON_MINION
@@ -167,7 +167,7 @@ max-minions: 6
 ## Scheduled Spawns
 
 Edit `plugins/eoxBossCore/spawn_schedule.yml`.  
-Changes apply on `/eoxbc reload` — no restart needed.
+Changes apply on `/eoxbc reload` no restart needed.
 
 ```yaml
 enabled: true   # master switch — false disables ALL schedules instantly
