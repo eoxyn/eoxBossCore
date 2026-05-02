@@ -1,5 +1,9 @@
-# eoxBossCore
-<img width="1254" height="1254" alt="eoxbosscore" src="https://github.com/user-attachments/assets/216ea437-429c-487c-860c-0fd0e7b0156e" />
+
+<img width="600" height="600" alt="eoxbosscore" src="https://github.com/user-attachments/assets/216ea437-429c-487c-860c-0fd0e7b0156e" />
+
+
+
+
 
 A powerful custom boss plugin for **Folia** and **Paper** 1.21.4+ servers.  
 Define fully custom bosses in YAML no coding required.
