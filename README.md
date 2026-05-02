@@ -1,5 +1,6 @@
 
-<img width="450" height="450" alt="eoxbosscore" src="https://github.com/user-attachments/assets/216ea437-429c-487c-860c-0fd0e7b0156e" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/71e1c133-034c-44c1-a8d7-4ee8b08e1068" />
+
 
 
 
