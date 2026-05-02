@@ -1,7 +1,7 @@
 # eoxBossCore
 
 A powerful custom boss plugin for **Folia** and **Paper** 1.21.4+ servers.  
-Define fully custom bosses in YAML — no coding required.
+Define fully custom bosses in YAML no coding required.
 
 ---
 
