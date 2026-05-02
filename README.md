@@ -1,12 +1,13 @@
 
-<img width="600" height="600" alt="eoxbosscore" src="https://github.com/user-attachments/assets/216ea437-429c-487c-860c-0fd0e7b0156e" />
+<img width="450" height="450" alt="eoxbosscore" src="https://github.com/user-attachments/assets/216ea437-429c-487c-860c-0fd0e7b0156e" />
 
 
 
+---
 
-
-A powerful custom boss plugin for **Folia** and **Paper** 1.21.4+ servers.  
-Define fully custom bosses in YAML no coding required.
+# eoxBossCore
+A powerful, lightweight, and fully asynchronous custom boss plugin for Folia and Paper 1.21.4+ servers. 
+Designed for high-performance environments, including servers with 1000+ concurrent players.
 
 ---
 
@@ -46,6 +47,8 @@ Define fully custom bosses in YAML no coding required.
 
 ---
 
+---
+
 ## Commands & Permissions
 
 | Command | Description | Permission |
@@ -55,6 +58,9 @@ Define fully custom bosses in YAML no coding required.
 | `/eoxbc list` | List active bosses | `eoxbc.admin` |
 | `/eoxbc reload` | Reload all configs | `eoxbc.admin` |
 | `/eoxbc debug` | Toggle debug/performance mode | `eoxbc.admin` |
+
+### Aliases
+- `/ebc` → shorthand for `/eoxbc`
 
 ---
 
