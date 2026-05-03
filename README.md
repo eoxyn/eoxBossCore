@@ -3,8 +3,6 @@
 
 ![Downloads](https://img.shields.io/github/downloads/eoxyn/eoxBossCore/total?color=brightgreen)
 
-[![Star History](https://api.star-history.com/svg?repos=eoxyn/eoxBossCore&type=Date)](https://star-history.com/#eoxyn/eoxBossCore)
-
 <a href="https://bstats.org/plugin/bukkit/eoxBossCore/31069">
   <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="800">
 </a>
