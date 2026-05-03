@@ -1,8 +1,10 @@
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/71e1c133-034c-44c1-a8d7-4ee8b08e1068" />
 
+<a href="https://bstats.org/plugin/bukkit/eoxBossCore/31069">
+  <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="1200">
+</a>
 
-[![bStats](https://bstats.org/signatures/bukkit/eoxBossCore.svg)](https://bstats.org/plugin/bukkit/eoxBossCore/31069)
 ---
 
 A powerful, lightweight, and fully asynchronous custom boss plugin for Folia and Paper 1.21.4+ servers. 
