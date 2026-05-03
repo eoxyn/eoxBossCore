@@ -4,9 +4,11 @@
 <a href="https://bstats.org/plugin/bukkit/eoxBossCore/31069">
   <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="800">
 </a>
----
+
 ![Downloads](https://img.shields.io/github/downloads/eoxyn/eoxBossCore/total?color=brightgreen)
 
+
+---
 A powerful, lightweight, and fully asynchronous custom boss plugin for Folia and Paper 1.21.4+ servers. 
 Designed for high-performance environments, including servers with 1000+ concurrent players.
 
