@@ -2,7 +2,8 @@
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/71e1c133-034c-44c1-a8d7-4ee8b08e1068" />
 
 
-
+[![bStats](https://img.shields.io/bstats/servers/31069?label=servers&color=brightgreen)](https://bstats.org/plugin/bukkit/eoxBossCore/31069)
+[![bStats Players](https://img.shields.io/bstats/players/31069?label=players&color=blue)](https://bstats.org/plugin/bukkit/eoxBossCore/31069)
 
 ---
 
