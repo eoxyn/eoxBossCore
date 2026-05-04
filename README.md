@@ -1,15 +1,13 @@
-
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/71e1c133-034c-44c1-a8d7-4ee8b08e1068" />
-
 <a href="https://bstats.org/plugin/bukkit/eoxBossCore/31069">
   <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="1200">
 </a>
 
 ---
-A powerful, lightweight, and fully asynchronous custom boss plugin for Folia and Paper 1.21.4+ servers. 
-Designed for high-performance environments, including servers with 1000+ concurrent players.
 
-Test Server: play.imibiyum.com
+A powerful, lightweight, and fully asynchronous custom boss plugin for Folia and Paper 1.21.4+ servers.  
+Designed for high-performance environments, including servers with 1000+ concurrent players.  
+Test Server: [play.imibiyum.com](http://play.imibiyum.com)
 
 ---
 
@@ -17,7 +15,7 @@ Test Server: play.imibiyum.com
 
 - Custom boss entities with any EntityType
 - Skill system: COMMAND, LIGHTNING, SUMMON_MINION (extensible)
-- Skill triggers: ON_SPAWN, ON_DEATH, ON_HIT, TIMER
+- Skill triggers: ON_SPAWN, ON_DEATH, ON_DAMAGE, ON_TIMER
 - Boss bar with range-based show/hide and color control
 - AI controller: SLEEP / IDLE / COMBAT state machine
 - Minion spawning with configurable max count
@@ -44,10 +42,8 @@ Test Server: play.imibiyum.com
 
 1. Drop `eoxBossCore.jar` into your `/plugins` folder.
 2. Start the server once to generate config files.
-3. Edit `plugins/eoxBossCore/bosses/` to define your bosses.
+3. Edit `plugins/eoxBossCore/boss.yml` to define your bosses.
 4. Run `/eoxbc reload` or restart.
-
----
 
 ---
 
@@ -62,61 +58,77 @@ Test Server: play.imibiyum.com
 | `/eoxbc debug` | Toggle debug/performance mode | `eoxbc.admin` |
 
 ### Aliases
-- `/ebc` → shorthand for `/eoxbc`
+
+`/ebc` and `/eoxboss` → shorthand for `/eoxbc`
 
 ---
 
 ## Boss Configuration
 
-Bosses are defined in `plugins/eoxBossCore/bosses/<name>.yml`.  
-Each file can contain one or more boss templates under the `bosses:` key.
+Bosses are defined in `plugins/eoxBossCore/boss.yml` under the `bosses:` key.
 
 ```yaml
 bosses:
   soul_guardian:
-    display-name: "<red><bold>Soul Guardian"
-    entity-type: WITHER_SKELETON
-    max-health: 500
-    movement-speed: 0.3
-    scale: 1.5
+    Type: WITHER_SKELETON
+    Name: "&4&lSoul Guardian"
+    Health: 500.0
+    Damage: 12.0
+    Scale: 1.8
+    MovementSpeed: 0.28
 
-    options:
-      boss-bar: true
-      boss-bar-color: RED
-      boss-bar-overlay: PROGRESS
-      boss-bar-range: 60
-      despawn: false
-      prevent-other-drops: true
+    Equipment:
+      MainHand:   DIAMOND_SWORD
+      OffHand:    SHIELD
+      Helmet:     NETHERITE_HELMET
+      Chestplate: NETHERITE_CHESTPLATE
+      Leggings:   NETHERITE_LEGGINGS
+      Boots:      NETHERITE_BOOTS
 
-    equipment:
-      main-hand:
-        material: IRON_SWORD
-        name: "<dark_red>Soul Blade"
-        enchantments:
-          SHARPNESS: 3
+    Options:
+      Despawn: false
+      PreventOtherDrops: true
+      MaxMinions: 6
+      BossBar: true
+      BossBarColor: RED
+      BossBarSegments: NOTCHED_20
+      BossBarRange: 80.0
 
-    skills:
-      - trigger: ON_SPAWN
-        type: COMMAND
-        commands:
-          - "say &4[Boss] &cThe Soul Guardian awakens!"
+    Minions:
+      BossId: soul_sentinel
+      Count: 3
 
-      - trigger: ON_DEATH
-        type: COMMAND
-        commands:
-          - "say &2[Boss] &aThe Soul Guardian has been slain by {killer}!"
+    Skills:
+      death_announce:
+        Trigger: ON_DEATH
+        Type: COMMAND
+        Target: "@self"
+        Commands:
+          - "say &4[Boss] &cSoul Guardian slain by &e{killer}&c! Top damager: &e{top_damager}"
+          - "give {killer} diamond 1"
+          - "give {top_damager} diamond 1"
 
-      - trigger: TIMER
-        interval: 200
-        type: LIGHTNING
-        target: CURRENT_TARGET
+      timer_lightning:
+        Trigger: ON_TIMER
+        Type: LIGHTNING
+        Target: "@LivingInRadius(15)"
+        Interval: 100
 
-      - trigger: TIMER
-        interval: 600
-        type: SUMMON_MINION
-        minion-boss-id: skeleton_minion
-        minion-count: 3
-        max-minions: 6
+      timer_summon:
+        Trigger: ON_TIMER
+        Type: SUMMON_MINION
+        Target: "@self"
+        Interval: 200
+        Parameters:
+          boss_id: "soul_sentinel"
+          count: "2"
+
+      spawn_announce:
+        Trigger: ON_SPAWN
+        Type: COMMAND
+        Target: "@self"
+        Commands:
+          - "say &4[Boss] &cA Soul Guardian has appeared at &e{boss_world} {boss_x} {boss_y} {boss_z}&c!"
 ```
 
 ---
@@ -129,16 +141,17 @@ bosses:
 |---|---|
 | `ON_SPAWN` | When the boss spawns |
 | `ON_DEATH` | When the boss dies |
-| `ON_HIT` | When the boss hits a player |
-| `TIMER` | Repeatedly, every `interval` ticks |
+| `ON_DAMAGE` | When the boss receives damage |
+| `ON_TIMER` | Repeatedly, every `Interval` ticks |
 
 ### Skill Types
 
-**COMMAND** Runs console commands. Supports color codes (`&c`, `&#RRGGBB`).
+**COMMAND** — Runs console commands. Supports `&c` and `&#RRGGBB` color codes.
 
 ```yaml
-type: COMMAND
-commands:
+Type: COMMAND
+Target: "@self"
+Commands:
   - "say &c{target} has been struck!"
   - "effect give {target} slowness 5 2"
 ```
@@ -147,35 +160,38 @@ Available placeholders: `{target}` `{target_x}` `{target_y}` `{target_z}`
 `{boss_x}` `{boss_y}` `{boss_z}` `{boss_world}`  
 `{killer}` `{killer_uuid}` `{top_damager}` `{top_damager_uuid}`
 
-**LIGHTNING** Strikes lightning at targets.
+**LIGHTNING** — Strikes lightning at targets.
 
 ```yaml
-type: LIGHTNING
-target: CURRENT_TARGET   # CURRENT_TARGET | RADIUS | SELF
-radius: 10               # only used when target: RADIUS
+Type: LIGHTNING
+Target: "@LivingInRadius(10)"   # @self | @LivingInRadius(N)
+Parameters:
+  effect_only: "false"           # true = visual only, no damage
 ```
 
-**SUMMON_MINION** Spawns minion bosses around the boss.
+**SUMMON_MINION** — Spawns minion bosses around the boss.
 
 ```yaml
-type: SUMMON_MINION
-minion-boss-id: skeleton_minion
-minion-count: 3
-max-minions: 6
+Type: SUMMON_MINION
+Target: "@self"
+Parameters:
+  boss_id: "soul_sentinel"
+  count: "3"
 ```
+
+> Max active minions is controlled by `MaxMinions` in the boss's `Options` block.
 
 ---
 
 ## Scheduled Spawns
 
 Edit `plugins/eoxBossCore/spawn_schedule.yml`.  
-Changes apply on `/eoxbc reload` no restart needed.
+Changes apply on `/eoxbc reload` — no restart needed.
 
 ```yaml
 enabled: true   # master switch — false disables ALL schedules instantly
 
 schedules:
-
   soul_guardian_weekly:
     enabled: true
     boss-id: soul_guardian
@@ -205,19 +221,19 @@ schedules:
 ```
 
 **Valid days:** `MONDAY` `TUESDAY` `WEDNESDAY` `THURSDAY` `FRIDAY` `SATURDAY` `SUNDAY` `EVERY_DAY`  
-**Time format:** `HH:mm` (24-hour)
+**Time format:** `HH:mm` (24-hour, server timezone)
 
 ---
 
 ## Database & Leaderboard
 
 Edit `plugins/eoxBossCore/database.yml`.  
-Requires a **full server restart** to apply (not `/eoxbc reload`).
+⚠️ Requires a **full server restart** to apply (not `/eoxbc reload`).
 
 ```yaml
 database:
   enabled: true
-  type: sqlite        # sqlite | mysql | mariadb
+  type: sqlite          # sqlite | mysql | mariadb
 
   sqlite:
     file: database/database.db
@@ -227,17 +243,22 @@ database:
   name: eoxbosscore
   username: root
   password: ''
+  table-prefix: eoxbc_  # change only before first startup
+
+  pool:
+    maximum-pool-size: 5
+    minimum-idle: 1
 
 leaderboard:
-  refresh-interval: 60
-  top-size: 10
+  refresh-interval: 60  # seconds between leaderboard refreshes
+  top-size: 10          # number of top players tracked (1–10)
 ```
 
 ---
 
 ## PlaceholderAPI
 
-Register eoxBossCore with PlaceholderAPI by having it installed.  
+PlaceholderAPI expansion registers automatically when PlaceholderAPI is installed.  
 All placeholders use the `%eoxbc_...%` prefix.
 
 | Placeholder | Returns |
@@ -257,10 +278,10 @@ All player-facing messages are in `plugins/eoxBossCore/messages.yml`.
 Supports both **MiniMessage** tags and **& color codes** (including `&#RRGGBB` hex).
 
 ```yaml
-prefix: "&8[&#fc4235eoxBossCore&8] "
+prefix: "&#d41c1ceoxBossCore &8»&r "
 
 command:
-  spawned: "{prefix}<green>Boss '<yellow>{boss}</yellow>' spawned."
+  spawned: "{prefix}&#b8f56eBoss '&#eaf56e{boss}&#b8f56e' spawned. &7(instance: &f{instance}&7)"
 ```
 
 ---
@@ -272,8 +293,8 @@ command:
 ```yaml
 settings:
   ai-tick-interval: 5        # ticks between AI updates per boss
-  bossbar-tick-interval: 10  # ticks between boss bar updates
-  sleep-range: 80            # blocks — boss sleeps when no player is within range
+  bossbar-tick-interval: 10  # ticks between boss bar range checks
+  sleep-range: 80            # blocks — boss sleeps when no player within range
 ```
 
 ---
