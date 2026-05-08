@@ -66,7 +66,7 @@ Test Server: [play.imibiyum.com](http://play.imibiyum.com)
 ## Boss Configuration
 
 Each boss lives in its own file inside `plugins/eoxBossCore/bosses/`.  
-You can name the files anything — `soul_guardian.yml`, `ruhani_boss.yml`, etc.  
+You can name the files anything `soul_guardian.yml`, `ruhani_boss.yml`, etc.  
 Every file must have a `bosses:` key at the top level.
 
 ```yaml
@@ -192,7 +192,7 @@ Parameters:
 ## Scheduled Spawns
 
 Edit `plugins/eoxBossCore/spawn_schedule.yml`.  
-Changes apply on `/eoxbc reload` — no restart needed.
+Changes apply on `/eoxbc reload` no restart needed.
 
 ```yaml
 enabled: true   # master switch false disables ALL schedules instantly
