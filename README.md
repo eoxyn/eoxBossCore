@@ -1,6 +1,6 @@
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/71e1c133-034c-44c1-a8d7-4ee8b08e1068" />
+<img width="1536" height="1024" alt="eoxBossCore banner" src="https://github.com/user-attachments/assets/71e1c133-034c-44c1-a8d7-4ee8b08e1068" />
 <a href="https://bstats.org/plugin/bukkit/eoxBossCore/31069">
-  <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="1200">
+  <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="1200" alt="eoxBossCore bStats statistics server and player count over time">
 </a>
 
 ---
@@ -24,7 +24,7 @@ Test Server: [play.imibiyum.com](http://play.imibiyum.com)
 - PlaceholderAPI expansion
 - Boss persistence across chunk unloads and server restarts
 - Full Folia thread-safety (no main-thread blocking)
-- `/eoxbc reload` — live config reload, no restart needed
+- `/eoxbc reload` live config reload, no restart needed
 
 ---
 
@@ -42,7 +42,7 @@ Test Server: [play.imibiyum.com](http://play.imibiyum.com)
 
 1. Drop `eoxBossCore.jar` into your `/plugins` folder.
 2. Start the server once to generate config files.
-3. Edit `plugins/eoxBossCore/boss.yml` to define your bosses.
+3. Add your boss files to `plugins/eoxBossCore/bosses/`.
 4. Run `/eoxbc reload` or restart.
 
 ---
@@ -65,9 +65,13 @@ Test Server: [play.imibiyum.com](http://play.imibiyum.com)
 
 ## Boss Configuration
 
-Bosses are defined in `plugins/eoxBossCore/boss.yml` under the `bosses:` key.
+Each boss lives in its own file inside `plugins/eoxBossCore/bosses/`.  
+You can name the files anything — `soul_guardian.yml`, `ruhani_boss.yml`, etc.  
+Every file must have a `bosses:` key at the top level.
 
 ```yaml
+# plugins/eoxBossCore/bosses/soul_guardian.yml
+
 bosses:
   soul_guardian:
     Type: WITHER_SKELETON
@@ -86,13 +90,15 @@ bosses:
       Boots:      NETHERITE_BOOTS
 
     Options:
-      Despawn: false
-      PreventOtherDrops: true
+      NaturalDespawn: false         # false = persists through chunk unloads
+      PreventOtherDrops: true       # suppresses natural mob drops (arrows, flesh, etc.)
       MaxMinions: 6
       BossBar: true
       BossBarColor: RED
       BossBarSegments: NOTCHED_20
       BossBarRange: 80.0
+      DespawnTimeout: 3600          # seconds of inactivity before auto-despawn (0 = never)
+      CountKillsInLeaderboard: true # false = kills not counted (useful for minion bosses)
 
     Minions:
       BossId: soul_sentinel
@@ -146,7 +152,7 @@ bosses:
 
 ### Skill Types
 
-**COMMAND** — Runs console commands. Supports `&c` and `&#RRGGBB` color codes.
+**COMMAND** Runs console commands. Supports `&c` and `&#RRGGBB` color codes.
 
 ```yaml
 Type: COMMAND
@@ -169,7 +175,7 @@ Parameters:
   effect_only: "false"           # true = visual only, no damage
 ```
 
-**SUMMON_MINION** — Spawns minion bosses around the boss.
+**SUMMON_MINION** Spawns minion bosses around the boss.
 
 ```yaml
 Type: SUMMON_MINION
@@ -189,7 +195,7 @@ Edit `plugins/eoxBossCore/spawn_schedule.yml`.
 Changes apply on `/eoxbc reload` — no restart needed.
 
 ```yaml
-enabled: true   # master switch — false disables ALL schedules instantly
+enabled: true   # master switch false disables ALL schedules instantly
 
 schedules:
   soul_guardian_weekly:
@@ -221,7 +227,7 @@ schedules:
 ```
 
 **Valid days:** `MONDAY` `TUESDAY` `WEDNESDAY` `THURSDAY` `FRIDAY` `SATURDAY` `SUNDAY` `EVERY_DAY`  
-**Time format:** `HH:mm` (24-hour, server timezone)
+**Time format:** `HH:mm` (24 hour, server timezone)
 
 ---
 
