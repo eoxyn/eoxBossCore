@@ -1,4 +1,5 @@
-<img width="1536" height="1024" alt="eoxBossCore banner" src="https://github.com/user-attachments/assets/71e1c133-034c-44c1-a8d7-4ee8b08e1068" />
+<img width="2138" height="736" alt="image" src="https://github.com/user-attachments/assets/d2719246-e09f-41f8-8acf-7c5e50acb010" />
+
 <a href="https://bstats.org/plugin/bukkit/eoxBossCore/31069">
   <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="1200" alt="eoxBossCore bStats statistics server and player count over time">
 </a>
