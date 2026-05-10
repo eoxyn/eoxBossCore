@@ -12,6 +12,18 @@ Test Server: [play.imibiyum.com](http://play.imibiyum.com)
 
 ---
 
+⚠️ **Attention!** Don’t forget to increase the `maxHealth` value in `spigot.yml`.
+
+Spigot does not allow you to exceed the maximum health limit, so if you set a value higher than this in the plugin, you will get an error.
+
+### spigot.yml
+
+```yml
+attribute:
+  maxHealth:
+    max: 1024.0
+```
+
 ## Features
 
 - Custom boss entities with any EntityType
