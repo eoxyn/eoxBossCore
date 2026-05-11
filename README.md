@@ -1,23 +1,20 @@
-<img width="2138" height="736" alt="image" src="https://github.com/user-attachments/assets/d2719246-e09f-41f8-8acf-7c5e50acb010" />
-
+<img width="2138" height="736" alt="eoxBossCore banner" src="https://github.com/user-attachments/assets/d2719246-e09f-41f8-8acf-7c5e50acb010" />
 <a href="https://bstats.org/plugin/bukkit/eoxBossCore/31069">
-  <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="1200" alt="eoxBossCore bStats statistics server and player count over time">
+  <img src="https://bstats.org/signatures/bukkit/eoxBossCore.svg" width="1200" alt="eoxBossCore bStats statistics — server and player count over time">
 </a>
 
 ---
 
-A powerful, lightweight, and fully asynchronous custom boss plugin for Folia and Paper 1.21.4+ servers.  
+A powerful, lightweight, and fully asynchronous custom boss plugin for Folia and Paper 1.20+ servers.  
 Designed for high-performance environments, including servers with 1000+ concurrent players.  
 Test Server: [play.imibiyum.com](http://play.imibiyum.com)
 
 ---
 
-⚠️ **Attention!** Don’t forget to increase the `maxHealth` value in `spigot.yml`.
-
+⚠️ **Attention!** Don't forget to increase the `maxHealth` value in `spigot.yml`.  
 Spigot does not allow you to exceed the maximum health limit, so if you set a value higher than this in the plugin, you will get an error.
 
 ### spigot.yml
-
 ```yml
 attribute:
   maxHealth:
@@ -31,13 +28,13 @@ attribute:
 - Skill triggers: ON_SPAWN, ON_DEATH, ON_DAMAGE, ON_TIMER
 - Boss bar with range-based show/hide and color control
 - AI controller: SLEEP / IDLE / COMBAT state machine
-- Minion spawning with configurable max count
+- Minion spawning with configurable max count and safe spawn locations
 - Scheduled spawns by day-of-week and time (spawn_schedule.yml)
 - Kill leaderboard with SQLite / MySQL / MariaDB support
-- PlaceholderAPI expansion
+- PlaceholderAPI expansion with per-player kill and rank placeholders
 - Boss persistence across chunk unloads and server restarts
 - Full Folia thread-safety (no main-thread blocking)
-- `/eoxbc reload` live config reload, no restart needed
+- `/eoxbc reload` — live config reload, no restart needed
 
 ---
 
@@ -45,7 +42,7 @@ attribute:
 
 | Requirement | Version |
 |---|---|
-| Paper or Folia | 1.21.4+ |
+| Paper or Folia | 1.20+ (including 26.x) |
 | Java | 17+ |
 | PlaceholderAPI | 2.11+ (optional) |
 
@@ -79,7 +76,7 @@ attribute:
 ## Boss Configuration
 
 Each boss lives in its own file inside `plugins/eoxBossCore/bosses/`.  
-You can name the files anything `soul_guardian.yml`, `ruhani_boss.yml`, etc.  
+You can name the files anything — `soul_guardian.yml`, `ruhani_boss.yml`, etc.  
 Every file must have a `bosses:` key at the top level.
 
 ```yaml
@@ -165,7 +162,7 @@ bosses:
 
 ### Skill Types
 
-**COMMAND** Runs console commands. Supports `&c` and `&#RRGGBB` color codes.
+**COMMAND** — Runs console commands. Supports `&c` and `&#RRGGBB` color codes.
 
 ```yaml
 Type: COMMAND
@@ -188,7 +185,7 @@ Parameters:
   effect_only: "false"           # true = visual only, no damage
 ```
 
-**SUMMON_MINION** Spawns minion bosses around the boss.
+**SUMMON_MINION** — Spawns minion bosses around the boss.
 
 ```yaml
 Type: SUMMON_MINION
@@ -205,10 +202,10 @@ Parameters:
 ## Scheduled Spawns
 
 Edit `plugins/eoxBossCore/spawn_schedule.yml`.  
-Changes apply on `/eoxbc reload` no restart needed.
+Changes apply on `/eoxbc reload` — no restart needed.
 
 ```yaml
-enabled: true   # master switch false disables ALL schedules instantly
+enabled: true   # master switch — false disables ALL schedules instantly
 
 schedules:
   soul_guardian_weekly:
@@ -240,7 +237,7 @@ schedules:
 ```
 
 **Valid days:** `MONDAY` `TUESDAY` `WEDNESDAY` `THURSDAY` `FRIDAY` `SATURDAY` `SUNDAY` `EVERY_DAY`  
-**Time format:** `HH:mm` (24 hour, server timezone)
+**Time format:** `HH:mm` (24-hour, server timezone)
 
 ---
 
